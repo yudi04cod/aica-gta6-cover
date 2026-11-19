@@ -3,20 +3,87 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Neon Coast Cover Lab — GTA-style cover maker</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
+  <aside class="panel" id="controls">
+    <header>
+      <h1>Neon Coast<br>Cover Lab</h1>
+      <p class="tagline">Turn your photos into a multi-panel poster cover, in the
+      style of a Vice City sunset. Everything runs on your machine —
+      photos are never uploaded.</p>
+    </header>
+
+    <section>
+      <h2>1 · Photos</h2>
+      <p class="hint">Add up to three photos. Click a panel in the preview, then
+      pick which photo fills it.</p>
+      <div class="slots" id="slots"></div>
+      <div class="row">
+        <button id="sample-photos" type="button">Try the sample photos</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>2 · Layout</h2>
+      <div class="choices" id="layouts"></div>
+      <h2>3 · Colour grade</h2>
+      <div class="choices" id="grades"></div>
+    </section>
+
+    <section>
+      <h2>4 · Lettering</h2>
+      <label>Title
+        <input id="title" type="text" maxlength="24" value="Sunset Heist">
+      </label>
+      <label>Subtitle
+        <input id="subtitle" type="text" maxlength="30" value="one last ride">
+      </label>
+      <label>Badge
+        <input id="badge" type="text" maxlength="18" value="NEON COAST">
+      </label>
+      <div class="row">
+        <label class="check"><input id="grain" type="checkbox" checked> Film grain</label>
+        <label class="check"><input id="vignette" type="checkbox" checked> Vignette</label>
+      </div>
+    </section>
+
+    <section>
+      <h2>5 · Selected panel</h2>
+      <p class="hint" id="panel-hint">Click a panel in the preview to move it.</p>
+      <label>Zoom <input id="zoom" type="range" min="1" max="3" step="0.01" value="1"></label>
+      <div class="row">
+        <button id="fit" type="button">Centre photo</button>
+        <button id="flip" type="button">Flip photo</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>6 · Export PNG</h2>
+      <div class="row export-row">
+        <button class="export" data-size="1080x1080" type="button">1080 × 1080</button>
+        <button class="export" data-size="1080x1350" type="button">1080 × 1350</button>
+        <button class="export" data-size="1920x1080" type="button">1920 × 1080</button>
+      </div>
+      <button id="export-all" type="button" class="primary">Export all three sizes</button>
+      <p id="status" role="status"></p>
+    </section>
+
+    <footer>
+      <p>Original art only — no game logos, artwork or fonts. Lettering uses
+      Anton and Pacifico, shipped under the SIL Open Font License.</p>
+    </footer>
+  </aside>
+
+  <section class="stage">
+    <div class="preview-wrap">
+      <canvas id="cover" width="1080" height="1080" aria-label="Cover preview"></canvas>
+    </div>
+    <p class="stage-hint">Drag a panel to move its photo · scroll on a panel to zoom ·
+    click a panel to select it</p>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>
